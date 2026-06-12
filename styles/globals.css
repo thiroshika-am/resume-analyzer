@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.dark {
+  color-scheme: dark;
+  background-color: #020617;
+  color: #e2e8f0;
+}
+
+body {
+  @apply min-h-screen bg-slate-50 text-slate-900;
+}
+
+.dark body {
+  @apply bg-slate-950 text-slate-100;
+}
+
+button,
+input,
+textarea,
+select {
+  @apply rounded-lg border border-slate-200 bg-white px-4 py-2 text-slate-900 transition duration-150 ease-in-out;
+}
+
+.dark button,
+.dark input,
+.dark textarea,
+.dark select {
+  @apply border-slate-800 bg-slate-900 text-slate-100;
+}
+
+.shadow-card {
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
