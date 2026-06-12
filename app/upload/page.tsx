@@ -17,9 +17,10 @@ export default function UploadPage() {
   const [sessionLoading, setSessionLoading] = useState(true)
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [dragActive, setDragActive] = useState(false)
+  const [statusMessage, setStatusMessage] = useState('')
 
   const canUpload = !!file && !loading && !sessionLoading && !!userEmail
-  const uploadLabel = loading ? 'Processing resume…' : 'Upload resume'
+  const uploadLabel = loading ? (statusMessage || 'Processing resume…') : 'Upload resume'
 
   const validateFile = (selected: File) => {
     const allowedExtensions = ['.pdf', '.docx']
@@ -101,6 +102,55 @@ export default function UploadPage() {
     loadAuth()
   }, [router])
 
+  const pollResumeStatus = (resumeId: number, token: string) => {
+    const pollInterval = 2000
+    let consecutiveErrors = 0
+
+    const poll = async () => {
+      try {
+        const response = await fetch(`/api/resumes/${resumeId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch processing status.')
+        }
+
+        const resumeData = await response.json()
+        consecutiveErrors = 0
+
+        setProgress(resumeData.progress ?? 30)
+        setStatusMessage(resumeData.processing_stage || 'Processing resume...')
+
+        if (resumeData.status === 'completed') {
+          setSuccess(resumeData)
+          setLoading(false)
+          setStatusMessage('')
+        } else if (resumeData.status === 'failed') {
+          setError(resumeData.processing_stage || 'Failed to process resume.')
+          setLoading(false)
+          setStatusMessage('')
+        } else {
+          setTimeout(poll, pollInterval)
+        }
+      } catch (err: any) {
+        console.error('Error during polling:', err)
+        consecutiveErrors++
+        if (consecutiveErrors >= 5) {
+          setError('Lost connection to server while processing resume.')
+          setLoading(false)
+          setStatusMessage('')
+        } else {
+          setTimeout(poll, pollInterval)
+        }
+      }
+    }
+
+    setTimeout(poll, pollInterval)
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setError('')
@@ -113,6 +163,7 @@ export default function UploadPage() {
 
     setLoading(true)
     setProgress(10)
+    setStatusMessage('Uploading resume...')
 
     try {
       const formData = new FormData()
@@ -132,25 +183,25 @@ export default function UploadPage() {
         },
       })
 
-      setProgress(60)
-
       if (!response.ok) {
         const body = await response.json().catch(() => null)
         setError(body?.detail || 'Resume upload failed. Please try again.')
         setLoading(false)
         setProgress(0)
+        setStatusMessage('')
         return
       }
 
-      const data: UploadResumeResponse = await response.json()
-      setSuccess(data)
-      setProgress(100)
+      const data = await response.json()
+      setProgress(25)
+      setStatusMessage('Upload complete. Starting background analysis...')
+      pollResumeStatus(data.resume_id, sessionResult.session.access_token)
     } catch (err: any) {
       console.error('Upload failed', err)
       setError(err?.message || 'Network error while uploading resume.')
       setProgress(0)
-    } finally {
       setLoading(false)
+      setStatusMessage('')
     }
   }
 
@@ -188,6 +239,12 @@ export default function UploadPage() {
             <div className="overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
               <div className="h-2 rounded-full bg-slate-900 transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
+          )}
+
+          {loading && statusMessage && (
+            <p className="text-center text-sm font-medium text-slate-600 dark:text-slate-400 mt-2">
+              {statusMessage}
+            </p>
           )}
 
           {error && (
@@ -251,13 +308,13 @@ export default function UploadPage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              <ResumeDataCard title="Education" items={analysis.education.map((item) => item.text)} />
-              <ResumeDataCard title="Projects" items={analysis.projects.map((item) => item.text)} />
+              <ResumeDataCard title="Education" items={analysis.education?.map((item) => item.text) ?? []} />
+              <ResumeDataCard title="Projects" items={analysis.projects?.map((item) => item.text) ?? []} />
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              <ResumeDataCard title="Experience" items={analysis.experience.map((item) => item.text)} />
-              <ResumeDataCard title="Certifications" items={analysis.certifications.map((item) => item.name || item.text || '')} />
+              <ResumeDataCard title="Experience" items={analysis.experience?.map((item) => item.text) ?? []} />
+              <ResumeDataCard title="Certifications" items={analysis.certifications?.map((item) => item.name || item.text || '') ?? []} />
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
@@ -278,7 +335,7 @@ export default function UploadPage() {
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-card dark:border-slate-800 dark:bg-slate-900">
               <h2 className="text-xl font-semibold text-slate-950 dark:text-slate-100">Job Matches</h2>
               <div className="mt-4 space-y-4">
-                {success.job_matches.length ? (
+                {success.job_matches?.length ? (
                   success.job_matches.map((job) => (
                     <div key={job.id} className="rounded-3xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950">
                       <div className="flex items-center justify-between gap-4">

@@ -108,18 +108,16 @@ export default function AuthPage() {
             <button
               type="button"
               onClick={() => setIsSignup(false)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                !isSignup ? 'bg-slate-900 text-white shadow-sm dark:bg-slate-100 dark:text-slate-950' : 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
-              }`}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${!isSignup ? 'bg-slate-900 text-white shadow-sm dark:bg-slate-100 dark:text-slate-950' : 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                }`}
             >
               Sign In
             </button>
             <button
               type="button"
               onClick={() => setIsSignup(true)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                isSignup ? 'bg-slate-900 text-white shadow-sm dark:bg-slate-100 dark:text-slate-950' : 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
-              }`}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${isSignup ? 'bg-slate-900 text-white shadow-sm dark:bg-slate-100 dark:text-slate-950' : 'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                }`}
             >
               Sign Up
             </button>

@@ -49,7 +49,12 @@ export default function DashboardPage() {
       }
 
       const data = await response.json()
-      setResumes(data)
+      if (Array.isArray(data)) {
+        setResumes(data)
+      } else {
+        console.error('Expected resumes array, got:', data)
+        setResumes([])
+      }
     } catch (error) {
       console.error('Error loading resumes', error)
     }
@@ -88,7 +93,7 @@ export default function DashboardPage() {
                 <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">Uploaded {new Date(resume.uploaded_at).toLocaleDateString()}</p>
                 <p className="mt-4 text-slate-700 dark:text-slate-300">{resume.summary || 'Resume summary will appear after processing.'}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {resume.skills.slice(0, 6).map((skill) => (
+                  {resume.skills?.slice(0, 6).map((skill) => (
                     <span key={skill} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-100">
                       {skill}
                     </span>
