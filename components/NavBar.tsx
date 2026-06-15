@@ -53,31 +53,77 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-      <Link href="/" className="text-lg font-semibold text-slate-900 dark:text-slate-100">Resume AI Matcher</Link>
-      <div className="flex items-center gap-4">
-        <Link href="/dashboard" className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Dashboard</Link>
-        <Link href="/upload" className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Upload</Link>
-        <Link href="/matches" className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Matches</Link>
-        <Link href="/insights" className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Insights</Link>
-        <Link href="/coach" className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Career Coach</Link>
-        <button type="button" onClick={toggleTheme} className="rounded-full border border-slate-200 p-2 text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800">
-          {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-        </button>
-        {currentPath === '/auth' ? (
-          <div className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 dark:bg-slate-950 dark:text-slate-100">
-            Sign In
+    <header className="sticky top-0 z-50 w-full px-6 py-4 transition-all duration-300">
+      <div className="mx-auto max-w-6xl rounded-xl glass-card border-white/5 px-6 py-3 flex items-center justify-between shadow-xl">
+        <Link 
+          href="/" 
+          className="text-sm font-bold tracking-tight text-white flex items-center gap-2 transition hover:opacity-85"
+        >
+          <span className="w-2.5 h-2.5 bg-white rounded-sm inline-block" />
+          Resume AI Matcher
+        </Link>
+        
+        <div className="flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-5">
+            {[
+              { label: 'Dashboard', path: '/dashboard' },
+              { label: 'Upload', path: '/upload' },
+              { label: 'Matches', path: '/matches' },
+              { label: 'Insights', path: '/insights' },
+              { label: 'Career Coach', path: '/coach' },
+            ].map((link) => {
+              const active = currentPath === link.path
+              return (
+                <Link 
+                  key={link.path}
+                  href={link.path} 
+                  className={`text-[10px] font-bold tracking-widest uppercase transition-colors relative py-1.5 ${
+                    active 
+                      ? 'text-white' 
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                  {active && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[1px] bg-white rounded-full" />
+                  )}
+                </Link>
+              )
+            })}
           </div>
-        ) : user ? (
-          <button type="button" onClick={handleSignOut} className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200">
-            Sign out
-          </button>
-        ) : (
-          <Link href="/auth" className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200">
-            Sign In
-          </Link>
-        )}
+
+          <div className="flex items-center gap-3 border-l border-white/5 pl-3">
+            <button 
+              type="button" 
+              onClick={toggleTheme} 
+              className="rounded-lg border border-white/5 p-2 text-slate-300 transition hover:bg-white/5 flex items-center justify-center active:scale-95 duration-100"
+            >
+              {theme === 'dark' ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+            </button>
+            
+            {currentPath === '/auth' ? (
+              <div className="rounded-lg bg-white px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-950 shadow-sm">
+                Sign In
+              </div>
+            ) : user ? (
+              <button 
+                type="button" 
+                onClick={handleSignOut} 
+                className="rounded-lg bg-white hover:bg-slate-200 px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-950 transition active:scale-95 duration-100 shadow-sm"
+              >
+                Sign out
+              </button>
+            ) : (
+              <Link 
+                href="/auth" 
+                className="rounded-lg bg-white hover:bg-slate-200 px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-950 transition active:scale-95 duration-100 shadow-sm"
+              >
+                Sign In
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
-    </nav>
+    </header>
   )
 }

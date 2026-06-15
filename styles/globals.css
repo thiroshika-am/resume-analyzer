@@ -2,41 +2,166 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
-}
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap');
 
-.dark {
+:root {
   color-scheme: dark;
-  background-color: #020617;
-  color: #e2e8f0;
+  font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #0F172A;
+  color: #F8FAFC;
 }
 
 body {
-  @apply min-h-screen bg-slate-50 text-slate-900;
+  @apply min-h-screen transition-colors duration-300 overflow-x-hidden antialiased;
+  background: radial-gradient(circle at 50% 50%, #111827 0%, #0F172A 100%) no-repeat fixed;
+  color: #F8FAFC;
+  font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-.dark body {
-  @apply bg-slate-950 text-slate-100;
+/* Premium Enterprise Glassmorphism Cards */
+.glass-card {
+  @apply border transition-all duration-300;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
 }
 
-button,
-input,
-textarea,
-select {
-  @apply rounded-lg border border-slate-200 bg-white px-4 py-2 text-slate-900 transition duration-150 ease-in-out;
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.dark button,
-.dark input,
-.dark textarea,
-.dark select {
-  @apply border-slate-800 bg-slate-900 text-slate-100;
+/* Glass inputs */
+.glass-input {
+  @apply text-white transition-all duration-200 outline-none rounded-xl px-4 py-3;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.shadow-card {
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+.glass-input:focus {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.02);
+}
+
+/* Buttons with silver gradient borders */
+.btn-silver {
+  @apply relative overflow-hidden transition-all duration-200 active:scale-95;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #F8FAFC;
+}
+
+.btn-silver:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Keyframe Animations */
+@keyframes silverSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes slowGridPulse {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.22;
+  }
+}
+
+@keyframes thinLaserScan {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.7;
+  }
+  95% {
+    opacity: 0.7;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-silver-sweep {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: silverSweep 2s infinite linear;
+}
+
+.animate-grid-pulse {
+  animation: slowGridPulse 10s ease-in-out infinite;
+}
+
+.animate-thin-scan {
+  animation: thinLaserScan 4s linear infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.01) 25%,
+    rgba(255, 255, 255, 0.04) 37%,
+    rgba(255, 255, 255, 0.01) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.5s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes pipelineDash {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+
+.animate-pipeline-flow {
+  stroke-dasharray: 6, 8;
+  animation: pipelineDash 1.5s linear infinite;
 }
