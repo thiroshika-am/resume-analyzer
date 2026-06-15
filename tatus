@@ -1,0 +1,184 @@
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530   1) 'use client'
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530   2) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530   3) import { useEffect, useState } from 'react'
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530   4) import Link from 'next/link'
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530   5) import { ArrowRight, ShieldCheck, Sparkles, TrendingUp, Cpu, Award, Target, Bot, Check, HelpCircle, FileText, ChevronRight } from 'lucide-react'
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530   6) import { motion, AnimatePresence } from 'framer-motion'
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530   7) import NavBar from '../components/NavBar'
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530   8) 
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530   9) export default function HomePage() {
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  10)   const containerVariants = {
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  11)     hidden: { opacity: 0 },
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  12)     visible: {
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  13)       opacity: 1,
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  14)       transition: {
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  15)         staggerChildren: 0.1,
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  16)       },
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  17)     },
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  18)   }
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  19) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  20)   const itemVariants = {
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  21)     hidden: { y: 20, opacity: 0 },
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  22)     visible: {
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  23)       y: 0,
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  24)       opacity: 1,
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  25)       transition: { type: 'spring' as const, stiffness: 90, damping: 20 },
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  26)     },
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  27)   }
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  28) 
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530  29)   return (
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  30)     <main className="min-h-screen relative flex flex-col justify-between overflow-x-hidden">
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530  31)       <NavBar />
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530  32) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  33)       {/* 1. HERO SECTION */}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  34)       <section className="mx-auto max-w-[1400px] w-full px-6 md:px-12 pt-20 pb-28 text-center flex flex-col items-center justify-center min-h-[90vh]">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  35)         <motion.div 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  36)           className="space-y-8 max-w-4xl"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  37)           variants={containerVariants}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  38)           initial="hidden"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  39)           animate="visible"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  40)         >
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  41)           <motion.div variants={itemVariants}>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  42)             <span className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/10 px-4 py-1.5 text-[10px] font-bold text-slate-300 tracking-widest uppercase">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  43)               <span className="w-1.5 h-1.5 bg-white rounded-full inline-block animate-pulse" />
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  44)               Advanced Career Intelligence OS
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530  45)             </span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  46)           </motion.div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  47)           
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  48)           <motion.h1 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  49)             className="text-5xl md:text-7xl lg:text-[92px] font-normal tracking-tighter text-white leading-[0.92] max-w-4xl mx-auto"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  50)             variants={itemVariants}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  51)           >
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  52)             Turn Your Resume Into<br />
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  53)             <span className="text-slate-400">Career Intelligence.</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  54)           </motion.h1>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  55) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  56)           <motion.p 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  57)             className="text-base md:text-lg lg:text-xl leading-relaxed text-slate-400 font-normal max-w-2xl mx-auto"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  58)             variants={itemVariants}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  59)           >
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  60)             Get recruiter-level resume analysis powered by AI. Extract skills, diagnose ATS template issues, and synthesize direct target roadmaps in seconds.
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  61)           </motion.p>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  62) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  63)           <motion.div 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  64)             className="flex flex-wrap justify-center gap-4 pt-2"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  65)             variants={itemVariants}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  66)           >
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  67)             <Link 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  68)               href="/auth" 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  69)               className="group inline-flex items-center justify-center rounded-lg bg-white text-slate-950 px-7 py-3.5 text-xs font-bold transition hover:bg-slate-100 shadow-sm active:scale-95 duration-100"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  70)             >
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  71)               Get Started
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  72)               <ArrowRight className="ml-2 h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  73)             </Link>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  74)             <Link 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  75)               href="/dashboard" 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  76)               className="btn-silver inline-flex items-center justify-center rounded-lg px-7 py-3.5 text-xs font-bold active:scale-95 duration-100"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  77)             >
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  78)               View Dashboard
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  79)             </Link>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  80)           </motion.div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  81)         </motion.div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  82) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  83)         {/* 2. VISUAL CENTERPIECE: Animated Intelligence Pipeline */}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  84)         <div className="w-full max-w-[1100px] mt-24">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  85)           <PipelineVisualization />
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  86)         </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  87)       </section>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  88) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  89)       {/* 3. TRUSTED BY (SOCIAL PROOF) */}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  90)       <section className="border-y border-white/[0.02] bg-white/[0.003] py-10 text-center">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  91)         <div className="mx-auto max-w-6xl px-6">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  92)           <p className="text-[9px] font-bold text-slate-500 tracking-widest uppercase mb-6">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  93)             INTEGRATED WITH LEADING WORKPLACE PLATFORMS
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  94)           </p>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  95)           <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-6 text-sm font-black text-slate-500/50 uppercase tracking-widest select-none">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  96)             <span>Stripe</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  97)             <span>Vercel</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  98)             <span>Linear</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530  99)             <span>Notion</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 100)             <span>Anthropic</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 101)             <span>Arc</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 102)           </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 103)         </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 104)       </section>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 105) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 106)       {/* 4. PLATFORM OVERVIEW / HOW IT WORKS */}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 107)       <section className="mx-auto max-w-6xl w-full px-6 py-32 space-y-16">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 108)         <div className="text-center space-y-4">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 109)           <span className="text-[9px] font-bold text-slate-400 tracking-widest uppercase">Platform Mechanics</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 110)           <h2 className="text-3xl md:text-5xl font-normal text-white tracking-tight leading-none">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 111)             Built for professional diagnostics.
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 112)           </h2>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 113)           <p className="text-slate-400 text-xs md:text-sm max-w-md mx-auto">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 114)             Our pipeline indexes, scores, and filters resumes against active job market parameters.
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 115)           </p>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 116)         </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 117) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 118)         <div className="grid gap-8 md:grid-cols-3">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 119)           <OverviewCard 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 120)             step="01"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 121)             title="Metadata Parsing"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 122)             description="Our custom parsers catalog technical and soft capability tags straight from your PDF."
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 123)           />
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 124)           <OverviewCard 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 125)             step="02"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 126)             title="ATS Diagnostics"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 127)             description="Runs layout tests mapping structure, text sizing, and syntax against modern resume parsers."
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 128)           />
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 129)           <OverviewCard 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 130)             step="03"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 131)             title="Roadmap Generation"
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 132)             description="Synthesizes targeted project ideas, recommended credentials, and job matches based on gap models."
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 133)           />
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 134)         </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 135)       </section>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 136) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 137)       {/* 5. FEATURE SHOWCASE: ATS ANALYSIS */}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 138)       <section className="border-t border-white/[0.02] py-32">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 139)         <div className="mx-auto max-w-6xl px-6 grid gap-16 lg:grid-cols-2 items-center">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 140)           <div className="space-y-6">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 141)             <span className="text-[9px] font-bold text-slate-400 tracking-widest uppercase">System Telemetry</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 142)             <h2 className="text-3xl md:text-5xl font-normal text-white tracking-tight leading-tight">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 143)               Detailed ATS scoring.<br />
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 144)               No guesswork.
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 145)             </h2>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 146)             <p className="text-slate-455 text-xs leading-relaxed max-w-md font-semibold">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 147)               Get detailed analysis on formatting, keywords alignment, and overall layout constraints. Detect weaknesses and receive optimizations designed to rank on recruiter dashboards.
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530 148)             </p>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 149)             <div className="pt-2">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 150)               <Link href="/auth" className="inline-flex items-center gap-1 text-xs font-bold text-white hover:text-slate-300">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 151)                 Run ATS Diagnostics <ChevronRight className="h-3.5 w-3.5" />
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530 152)               </Link>
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530 153)             </div>
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530 154)           </div>
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530 155) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 156)           {/* Interactive Showcase Mockup */}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 157)           <div className="glass-card rounded-2xl p-6 border-white/5 shadow-2xl space-y-4 max-w-md mx-auto w-full">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 158)             <div className="flex justify-between items-center border-b border-white/5 pb-3">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 159)               <span className="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Analysis Results</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 160)               <span className="text-[9px] font-bold text-emerald-400 bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/10">Active Test</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 161)             </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 162)             <div className="space-y-2">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 163)               <div className="flex justify-between text-xs font-bold text-slate-300">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 164)                 <span>ATS Structure Match</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 165)                 <span className="text-white">88%</span>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 166)               </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 167)               <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 168)                 <div className="h-full bg-white/80 w-[88%]" />
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530 169)               </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 170)             </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 171)             <div className="space-y-2 text-xs font-semibold leading-relaxed border-t border-white/5 pt-3 text-slate-400">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 172)               <p className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-white mt-0.5 shrink-0" /> Contact variables parsed correctly</p>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 173)               <p className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-white mt-0.5 shrink-0" /> Primary technical skills index matched</p>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 174)               <p className="flex items-start gap-2 text-slate-500"><span className="w-3.5 h-3.5 rounded-full bg-white/5 inline-block shrink-0" /> Missing target cloud deployment certificate tag</p>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 175)             </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 176)           </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 177)         </div>
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 178)       </section>
+^b6b3d07 (Smart AI Cap Developer 2026-06-12 12:47:06 +0530 179) 
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 180)       {/* 6. FEATURE SHOWCASE: CAREER INSIGHTS */}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 181)       <section className="border-t border-white/[0.02] py-32 bg-white/[0.002]">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 182)         <div className="mx-auto max-w-6xl px-6 grid gap-16 lg:grid-cols-2 items-center">
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 183)           {/* Interactive Chat Mockup */}
+20f06aae (thiroshika-am          2026-06-15 20:30:00 +0530 184)           <div className="glass-card rounded-2xl border-white/5 shadow-2xl overflow-hidden max-w-md mx-auto w-fu
