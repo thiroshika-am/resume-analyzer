@@ -1,4 +1,4 @@
 # Resume-Analyzer
 ## Developed by
-   - Thiroshika
-   - Guru Priya PS
+   - GURU PRIYA P S
+   - THIROSHIKA A M
